@@ -15,7 +15,7 @@ abstract class AppDatabase : RoomDatabase() {
 
     abstract fun quoteDao(): QuoteDao
 
-    private class WordDatabaseCallback(
+    private class QuoteDatabaseCallback(
         private val scope: CoroutineScope
     ) : RoomDatabase.Callback() {
 
@@ -53,7 +53,7 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "valicsek_david_database"
                 )
-                    .addCallback(WordDatabaseCallback(scope))
+                    .addCallback(QuoteDatabaseCallback(scope))
                     .build()
                 INSTANCE = instance
                 // return instance

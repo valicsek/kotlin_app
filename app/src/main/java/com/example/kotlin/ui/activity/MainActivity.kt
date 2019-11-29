@@ -1,13 +1,16 @@
-package com.example.kotlin.ui
+package com.example.kotlin.ui.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.kotlin.R
 import com.example.kotlin.data.model.Quote
 import com.example.kotlin.ui.adapter.QuoteAdapter
+import com.example.kotlin.ui.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -29,7 +32,6 @@ class MainActivity : AppCompatActivity() {
         // Use ViewModelProviders class to create / get already created QuotesViewModel
         // for this view (activity)
 
-
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         // Observing LiveData from the QuotesViewModel which in turn observes
@@ -39,7 +41,11 @@ class MainActivity : AppCompatActivity() {
             // such as an array or database query, and creates a view for each item.
             // Then it inserts the views into the ListView.
             // quoteAdapter = ArrayAdapter(this, R.layout.list_view, quotes)
-            quoteAdapter = QuoteAdapter(this, R.layout.support_simple_spinner_dropdown_item, quotes)
+            quoteAdapter = QuoteAdapter(
+                this,
+                R.layout.support_simple_spinner_dropdown_item,
+                quotes
+            )
             quote_list_view.adapter = quoteAdapter
             textView_items_left.text = quotes.size.toString() + " Quotes"
         })
@@ -53,7 +59,6 @@ class MainActivity : AppCompatActivity() {
             val quote = Quote(
                 editText_quote.text.toString(),
                 editText_author.text.toString()
-
             )
 
             if (editText_author.text.isNotEmpty() && editText_quote.text.isNotEmpty()) {
@@ -61,6 +66,8 @@ class MainActivity : AppCompatActivity() {
                 viewModel.insert(quote)
                 editText_quote.setText("")
                 editText_author.setText("")
+            } else {
+                Toast.makeText(applicationContext,"The field(s) is/are empty.",Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -81,5 +88,14 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+
+        // Show another activity when you click to an element from the list view
+        quote_list_view.setOnItemClickListener { parent, view, position, id ->
+            val element = quoteAdapter.getItem(position) // The item that was clicked
+            val intent = Intent(this, QuoteDetailActivity::class.java)
+            intent.putExtra("author", element?.author)
+            intent.putExtra("quote", element?.quote)
+            startActivity(intent)
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.kotlin.ui
+package com.example.kotlin.ui.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -14,14 +14,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     // The ViewModel maintains a reference to the repository to get data.
     private val repository: QuoteRepository
-    // LiveData gives us updated words when they change.
+    // LiveData gives us updated quotes when they change.
     val allQuotes: LiveData<List<Quote>>
 
     init {
-        // Gets reference to WordDao from WordRoomDatabase to construct
-        // the correct WordRepository.
         val wordsDao = AppDatabase.getDatabase(application, viewModelScope).quoteDao()
         repository = QuoteRepository.getInstance(wordsDao)
+        // Request all of the quotes
         allQuotes = repository.getQuotes()
     }
 
@@ -34,5 +33,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
      */
     fun insert(quote: Quote) = viewModelScope.launch {
         repository.addQuote(quote)
+    }
+
+    fun delete(quote: Quote) = viewModelScope.launch {
+        repository.deleteQuote(quote)
     }
 }

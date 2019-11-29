@@ -45,7 +45,6 @@ class QuoteAdapter(
 
         view.findViewById<TextView>(R.id.text1).text = filteredQuoteList[position].author + " : " + filteredQuoteList[position].quote
 
-
         // return super.getView(position, convertView, parent)
         return view
     }

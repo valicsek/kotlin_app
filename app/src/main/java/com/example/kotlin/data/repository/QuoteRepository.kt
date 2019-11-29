@@ -17,6 +17,10 @@ class QuoteRepository private constructor(private val quoteDao: QuoteDao) {
 
     fun getQuotes() = quoteDao.getQuotes()
 
+    suspend fun deleteQuote(quote: Quote) {
+        quoteDao.delete(quote)
+    }
+
     companion object {
         // Singleton instantiation we already know and love
         @Volatile private var instance: QuoteRepository? = null
