@@ -15,6 +15,8 @@ class QuoteDetailActivity : AppCompatActivity() {
     }
 
     private fun setupUserInterface() {
+        title = "Quote Details Activity"
+
         // Set the data from the MainActivity
         val author = intent.getStringExtra("author")
         val quote = intent.getStringExtra("quote")

@@ -56,14 +56,12 @@ class MainActivity : AppCompatActivity() {
     private fun setListeners(viewModel : MainViewModel) {
         // When button is clicked, instantiate a Quote and add it to DB through the ViewModel
         button_add_quote.setOnClickListener {
-            val quote = Quote(
-                editText_quote.text.toString(),
-                editText_author.text.toString()
-            )
-
             if (editText_author.text.isNotEmpty() && editText_quote.text.isNotEmpty()) {
                 // Run the database process in a global scope.
-                viewModel.insert(quote)
+                viewModel.insert(Quote(
+                    editText_quote.text.toString(),
+                    editText_author.text.toString()
+                ))
                 editText_quote.setText("")
                 editText_author.setText("")
             } else {
