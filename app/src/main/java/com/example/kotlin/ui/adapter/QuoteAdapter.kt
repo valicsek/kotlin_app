@@ -43,7 +43,7 @@ class QuoteAdapter(
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.simple_list_item_1, null)
 
-        view.findViewById<TextView>(R.id.text1).text = filteredQuoteList[position].author + " : " + filteredQuoteList[position].quoteText
+        view.findViewById<TextView>(R.id.text1).text = filteredQuoteList[position].author + " : " + filteredQuoteList[position].quote
 
 
         // return super.getView(position, convertView, parent)
@@ -67,7 +67,7 @@ class QuoteAdapter(
                 else
                     quoteList.filter {
                         it.author.toLowerCase().contains(queryString) ||
-                                it.quoteText.toLowerCase().contains(queryString)
+                                it.quote.toLowerCase().contains(queryString)
                     }
                 return filterResults
             }

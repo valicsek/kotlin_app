@@ -4,16 +4,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.SearchView
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.example.kotlin.R
 import com.example.kotlin.data.model.Quote
 import com.example.kotlin.ui.adapter.QuoteAdapter
-import com.example.kotlin.utilities.InjectorUtils
-
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var viewModel: MainViewModel
     lateinit var quoteAdapter : QuoteAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,15 +25,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun initializeUserInterface() {
         // Get the QuotesViewModelFactory with all of it's dependencies constructed
-        val factory = InjectorUtils.provideQuotesViewModelFactory()
+        // val factory = InjectorUtils.provideQuotesViewModelFactory()
         // Use ViewModelProviders class to create / get already created QuotesViewModel
         // for this view (activity)
-        val viewModel = ViewModelProviders.of(this, factory)
-            .get(MainViewModel::class.java)
+
+
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         // Observing LiveData from the QuotesViewModel which in turn observes
         // LiveData from the repository, which observes LiveData from the DAO ☺
-        viewModel.getQuotes().observe(this, Observer { quotes ->
+        viewModel.allQuotes.observe(this, Observer { quotes ->
             // An adapter loads the information to be displayed from a data source,
             // such as an array or database query, and creates a view for each item.
             // Then it inserts the views into the ListView.
@@ -52,10 +53,12 @@ class MainActivity : AppCompatActivity() {
             val quote = Quote(
                 editText_quote.text.toString(),
                 editText_author.text.toString()
+
             )
 
             if (editText_author.text.isNotEmpty() && editText_quote.text.isNotEmpty()) {
-                viewModel.addQuote(quote)
+                // Run the database process in a global scope.
+                viewModel.insert(quote)
                 editText_quote.setText("")
                 editText_author.setText("")
             }

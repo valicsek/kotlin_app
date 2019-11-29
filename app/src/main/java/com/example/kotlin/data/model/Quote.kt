@@ -1,9 +1,14 @@
 package com.example.kotlin.data.model
 
-data class Quote(val quoteText: String,
-                 val author: String) {
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-    override fun toString(): String {
-        return "$quoteText - $author"
-    }
+@Entity
+data class Quote(
+    @ColumnInfo(name = "author") val author: String,
+    @ColumnInfo(name = "quote") val quote: String
+) {
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name= "id") var id: Int = 0
 }
