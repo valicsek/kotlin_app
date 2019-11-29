@@ -31,7 +31,7 @@ class QuoteAdapter(
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.simple_list_item_1, null)
 
-        view.findViewById<TextView>(R.id.text1).text = quoteList[position].quoteText
+        view.findViewById<TextView>(R.id.text1).text = quoteList[position].author + " : " + quoteList[position].quoteText
 
 
         // return super.getView(position, convertView, parent)

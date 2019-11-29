@@ -10,12 +10,24 @@
     android:background="@color/colorWhitishGrey"
     tools:context=".ui.MainActivity">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:background="@color/colorPrimary"
         android:padding="15sp"
         >
+
+        <TextView
+            android:id="@+id/textView_items_left"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Items left"
+            android:textSize="18sp"
+            android:paddingBottom="10sp"
+            android:textColor="@color/colorWhitishGrey"
+            />
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -30,17 +42,16 @@
                 >
 
                 <EditText
-                    android:id="@+id/editText_quote"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:hint="Quote" />
-
-
-                <EditText
                     android:id="@+id/editText_author"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Author" />
+
+                <EditText
+                    android:id="@+id/editText_quote"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:hint="Quote" />
 
                 <Button
                     android:id="@+id/button_add_quote"
@@ -54,7 +65,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-    </RelativeLayout>
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -38,9 +38,9 @@ class MainActivity : AppCompatActivity() {
             // such as an array or database query, and creates a view for each item.
             // Then it inserts the views into the ListView.
             // quoteAdapter = ArrayAdapter(this, R.layout.list_view, quotes)
-            quoteAdapter = QuoteAdapter(this, R.layout.list_view, quotes)
+            quoteAdapter = QuoteAdapter(this, R.layout.support_simple_spinner_dropdown_item, quotes)
             quote_list_view.adapter = quoteAdapter
-
+            textView_items_left.text = quotes.size.toString() + " Quotes"
         })
 
         setListeners(viewModel)
@@ -53,9 +53,12 @@ class MainActivity : AppCompatActivity() {
                 editText_quote.text.toString(),
                 editText_author.text.toString()
             )
-            viewModel.addQuote(quote)
-            editText_quote.setText("")
-            editText_author.setText("")
+
+            if (editText_author.text.isNotEmpty() && editText_quote.text.isNotEmpty()) {
+                viewModel.addQuote(quote)
+                editText_quote.setText("")
+                editText_author.setText("")
+            }
         }
 
         // Open by default the search view.
