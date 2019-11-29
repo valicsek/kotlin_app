@@ -2,7 +2,7 @@ package com.example.kotlin.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.kotlin.data.QuoteRepository
+import com.example.kotlin.data.repository.QuoteRepository
 
 // The same repository that's needed for QuotesViewModel
 // is also passed to the factory

@@ -1,7 +1,7 @@
 package com.example.kotlin.utilities
 
 import com.example.kotlin.data.FakeDatabase
-import com.example.kotlin.data.QuoteRepository
+import com.example.kotlin.data.repository.QuoteRepository
 import com.example.kotlin.ui.MainViewModelFactory
 
 object InjectorUtils {

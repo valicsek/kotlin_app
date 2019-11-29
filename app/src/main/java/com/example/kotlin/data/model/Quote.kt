@@ -1,4 +1,4 @@
-package com.example.kotlin.data
+package com.example.kotlin.data.model
 
 data class Quote(val quoteText: String,
                  val author: String) {

@@ -1,4 +1,7 @@
-package com.example.kotlin.data
+package com.example.kotlin.data.repository
+
+import com.example.kotlin.data.FakeQuoteDao
+import com.example.kotlin.data.model.Quote
 
 // FakeQuoteDao must be passed in - it is a dependency
 // You could also instantiate the DAO right inside the class without all the fuss, right?
@@ -21,7 +24,8 @@ class QuoteRepository private constructor(private val quoteDao: FakeQuoteDao) {
 
         fun getInstance(quoteDao: FakeQuoteDao) =
             instance ?: synchronized(this) {
-                instance ?: QuoteRepository(quoteDao).also { instance = it }
+                instance
+                    ?: QuoteRepository(quoteDao).also { instance = it }
             }
     }
 }

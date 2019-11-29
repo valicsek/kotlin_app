@@ -2,6 +2,7 @@ package com.example.kotlin.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.kotlin.data.model.Quote
 
 class FakeQuoteDao {
     // A fake database table
